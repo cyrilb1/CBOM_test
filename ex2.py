@@ -12,7 +12,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
 # Ex1
-key = Fernet.generate_key()
+key = Fernet.generate_key() # Recognized by CBOMkit
 f = Fernet(key)
 token = f.encrypt(b"Secret message")
 
@@ -20,7 +20,7 @@ f.decrypt(token)
 
 
 # Ex2
-key = Fernet.generate_key()
+key = Fernet.generate_key() # Recognized by CBOMkit
 f = Fernet(key)
 token = f.encrypt(b"Secret message")
 
@@ -36,7 +36,7 @@ f.decrypt_at_time(token, ttl=60, current_time=current_time)
 password = b"password"
 salt = os.urandom(16)
 
-kdf = PBKDF2HMAC(
+kdf = PBKDF2HMAC( # Recognized by CBOMkit
     algorithm=hashes.SHA256(),
     length=32,
     salt=salt,
@@ -51,15 +51,15 @@ f.decrypt(token)
 
 
 # Ex4
-key1 = Fernet(Fernet.generate_key())
-key2 = Fernet(Fernet.generate_key())
+key1 = Fernet(Fernet.generate_key()) # Recognized by CBOMkit
+key2 = Fernet(Fernet.generate_key()) # Recognized by CBOMkit
 f = MultiFernet([key1, key2])
 token = f.encrypt(b"Secret message")
 
 f.decrypt(token)
 
 
-key3 = Fernet(Fernet.generate_key())
+key3 = Fernet(Fernet.generate_key()) # Recognized by CBOMkit
 f2 = f = MultiFernet([key3, key1, key2])
 rotated = f2.rotate(token)
 
@@ -85,7 +85,7 @@ from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
 data = b"a secret message"
 aad = b"authenticated but unencrypted data"
 
-key = ChaCha20Poly1305.generate_key()
+key = ChaCha20Poly1305.generate_key() # Recognized by CBOMkit
 chacha = ChaCha20Poly1305(key)
 nonce = os.urandom(12)
 ct = chacha.encrypt(nonce, data, aad)
@@ -100,7 +100,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 data = b"a secret message"
 aad = b"authenticated but unencrypted data"
 
-key = AESGCM.generate_key(bit_length=128)
+key = AESGCM.generate_key(bit_length=128) # Recognized by CBOMkit
 aesgcm = AESGCM(key)
 nonce = os.urandom(12)
 ct = aesgcm.encrypt(nonce, data, aad)
@@ -130,7 +130,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESOCB3
 data = b"a secret message"
 aad = b"authenticated but unencrypted data"
 
-key = AESOCB3.generate_key(bit_length=128)
+key = AESOCB3.generate_key(bit_length=128) # Recognized by CBOMkit
 aesocb = AESOCB3(key)
 nonce = os.urandom(12)
 ct = aesocb.encrypt(nonce, data, aad)
@@ -146,7 +146,7 @@ data = b"a secret message"
 nonce = os.urandom(16)
 
 aad = [b"authenticated but unencrypted data", nonce]
-key = AESSIV.generate_key(bit_length=512)
+key = AESSIV.generate_key(bit_length=512) # Recognized by CBOMkit
 aessiv = AESSIV(key)
 ct = aessiv.encrypt(data, aad)
 
@@ -164,7 +164,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESCCM
 data = b"a secret message"
 aad = b"authenticated but unencrypted data"
 
-key = AESCCM.generate_key(bit_length=128)
+key = AESCCM.generate_key(bit_length=128) # Recognized by CBOMkit
 aesccm = AESCCM(key)
 nonce = os.urandom(13)
 ct = aesccm.encrypt(nonce, data, aad)
